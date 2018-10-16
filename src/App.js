@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import web3 from './web3';
+import lottery from './lottery'
 
 class App extends Component {
   render() {
     console.log(web3.version);
-    web3.eth.getAccounts().then(console.log);
+    // web3.eth.getAccounts().then(console.log);
+    console.log(lottery);
 
     return (
       <div className="App">

@@ -1,6 +1,6 @@
 import web3 from "./web3";
-import ContractAddress from './keySecrets';
-import ContractABI from './keySecrets';
+import { ABI, Address } from './keySecrets';
 
 
-export default new web3.eth.Contract(ContractABI, ContractAddress);
+
+export default new web3.eth.Contract(ABI, Address);
