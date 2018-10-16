@@ -24,6 +24,7 @@ class App extends Component {
     return (
       <div>
         <p>the manager of the contract is {this.state.manager} </p>
+        <p>and the contract address is {lottery.options.address} </p>
       </div>
     );
   }
