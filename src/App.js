@@ -9,6 +9,7 @@ class App extends Component {
     manager: ' ',
     players: [],
     balance: '',
+    value: ''
   };
 
   async componentDidMount() {
@@ -28,7 +29,17 @@ class App extends Component {
         <p>Welcome to the Lottery Contract which is managed by {this.state.manager}.</p>
         <p>The address of the Contract is {lottery.options.address}</p>
         <br />
-        <p>There are currently {this.state.players.length} account(s) who have participated in the Lottery.  The total size of the pool is {this.state.balance} ether</p>
+        <p>There are currently {this.state.players.length} account(s) who have participated in the Lottery.  The total size of the pool is {this.state.balance} ether.</p>
+
+        <hr />
+        <form>
+          <h4>Want to try your luck</h4>
+          <div>
+            <label>Amount of Ether to enter</label>
+            <input value={this.state.value} onChange={event => this.setState({ value: event.target.value })} />
+          </div>
+        </form>
+
       </div>
     );
   }
