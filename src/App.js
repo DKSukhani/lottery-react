@@ -19,6 +19,18 @@ class App extends Component {
     this.setState({ manager, players, balance });
   }
 
+  onSubmit = async (event) => {
+    event.preventDefault();
+    const accounts = web3.eth.getAccounts();
+
+    await lottery.methods.enterLotteryContract().send({
+      from: accounts[0],
+      value: web3.utils.toWei(this.state.value, 'ether')
+    });
+
+  }
+
+
   render() {
     // console.log(web3.version);
     // web3.eth.getAccounts().then(console.log);
@@ -32,12 +44,13 @@ class App extends Component {
         <p>There are currently {this.state.players.length} account(s) who have participated in the Lottery.  The total size of the pool is {this.state.balance} ether.</p>
 
         <hr />
-        <form>
+        <form onSubmit={this.onSubmit}>
           <h4>Want to try your luck</h4>
           <div>
             <label>Amount of Ether to enter</label>
             <input value={this.state.value} onChange={event => this.setState({ value: event.target.value })} />
           </div>
+          <button>Enter</button>
         </form>
 
       </div>
