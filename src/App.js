@@ -9,7 +9,8 @@ class App extends Component {
     manager: ' ',
     players: [],
     balance: '',
-    value: ''
+    value: '',
+    message: ''
   };
 
   async componentDidMount() {
@@ -21,12 +22,17 @@ class App extends Component {
 
   onSubmit = async (event) => {
     event.preventDefault();
-    const accounts = web3.eth.getAccounts();
+    const accounts = await web3.eth.getAccounts();
+
+    this.setState({ message: "Waiting for the transaction to be mined..." });
 
     await lottery.methods.enterLotteryContract().send({
       from: accounts[0],
       value: web3.utils.toWei(this.state.value, 'ether')
     });
+
+    this.setState({ message: "Congrats, the tx has been mined; you have entered the contract" });
+
 
   }
 
@@ -52,7 +58,8 @@ class App extends Component {
           </div>
           <button>Enter</button>
         </form>
-
+        <hr />
+        <h1>{this.state.message}</h1>
       </div>
     );
   }
