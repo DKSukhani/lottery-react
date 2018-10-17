@@ -38,7 +38,15 @@ class App extends Component {
     this.setState({ message: "Congrats, the tx has been mined; your txhash is " + txhash })
     console.log(txhash);
 
-  }
+  };
+
+  onClick = async () => {
+    const accounts = await web3.eth.getAccounts();
+
+    await lottery.methods.pickWinner().send({
+      from: accounts[0]
+    });
+  };
 
 
   render() {
@@ -52,7 +60,6 @@ class App extends Component {
         <p>The address of the Contract is {lottery.options.address}</p>
         <br />
         <p>There are currently {this.state.players.length} account(s) who have participated in the Lottery.  The total size of the pool is {this.state.balance} ether.</p>
-
         <hr />
         <form onSubmit={this.onSubmit}>
           <h4>Want to try your luck</h4>
@@ -64,6 +71,9 @@ class App extends Component {
         </form>
         <hr />
         <h1>{this.state.message}</h1>
+        <hr />
+        <h4>Ready to pick a Winner?</h4>
+        <button onClick={this.onClick}>Yiphee! Pick a winner</button>
       </div>
     );
   }
