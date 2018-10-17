@@ -4,6 +4,8 @@ import './App.css';
 import web3 from './web3';
 import lottery from './lottery'
 
+let txhash = '';
+
 class App extends Component {
   state = {
     manager: ' ',
@@ -29,10 +31,12 @@ class App extends Component {
     await lottery.methods.enterLotteryContract().send({
       from: accounts[0],
       value: web3.utils.toWei(this.state.value, 'ether')
+    }).on('transactionHash', function (hash) {
+      txhash = hash
     });
 
-    this.setState({ message: "Congrats, the tx has been mined; you have entered the contract" });
-
+    this.setState({ message: "Congrats, the tx has been mined; your txhash is " + txhash })
+    console.log(txhash);
 
   }
 
